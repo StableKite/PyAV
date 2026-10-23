@@ -1,0 +1,28 @@
+{
+  "source_commit": "a4ad0133b13eb84067dc6e8105eb1fc8f8b93c4f",
+  "source_backend": "setuptools.build_meta:__legacy__",
+  "source_backend_path": [],
+  "minimum_glibc": [
+    2,
+    39
+  ],
+  "source_project": "db42d84f54a8f276edbd841bebfc01e562d0199b193971c61a63dc4d834af61f",
+  "delivery_paths": [
+    "_binary_wheel_backend.py",
+    "binary_wheels.json",
+    "README.binary-wheels.md",
+    "pyproject.toml",
+    "MANIFEST.in"
+  ],
+  "delivery_source_hashes": {
+    "_binary_wheel_backend.py": "fc4697ea1ee586c2ae3df2397be14ef13246f7b7b8f42485057e36c0852fe37a",
+    "README.binary-wheels.md": "05617ca74a60f542d4f2a146f8e5308158d123ba97856b6b3e0deebd3a5b1595",
+    "pyproject.toml": "d9ca0d87bd1a9ed5210ea0ff8bcd53a24c72b67a319c2c421abebd0b915f6e25",
+    "MANIFEST.in": "7e50bb94452e895a4a8aff87e22a7c059c3bd26f8da7c4f7e95e6cf638d9d3ac"
+  },
+  "artifact": {
+    "filename": "av-19.0.2-cp315-cp315t-manylinux_2_38_x86_64.manylinux_2_39_x86_64.whl",
+    "url": "https://github.com/StableKite/PyAV/releases/download/cp315t-linux-r68-20261024/av-19.0.2-cp315-cp315t-manylinux_2_38_x86_64.manylinux_2_39_x86_64.whl",
+    "sha256": "8a8bc3d0414bba3aab8b3bd17c41a0f0b3d7e1d89e91c051eec593972af05200"
+  }
+}
