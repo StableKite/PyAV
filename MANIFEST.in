@@ -7,3 +7,4 @@ recursive-include src/av *.c *.h
 recursive-include tests *.py
 # Include the PEP 517 delivery adapter in source distributions.
 include _binary_wheel_backend.py binary_wheels.json README.binary-wheels.md
+include _windows_source_backend.py

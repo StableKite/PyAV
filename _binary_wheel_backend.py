@@ -79,12 +79,20 @@ def _source():
 def get_requires_for_build_wheel(config_settings=None):
     if _asset(config_settings):
         return ['pip']
-    return _source().get_requires_for_build_wheel(config_settings)
+    requires = _source().get_requires_for_build_wheel(config_settings)
+    import _windows_source_backend
+    if _windows_source_backend.enabled(config_settings):
+        return [*requires, 'delvewheel']
+    return requires
 
 
 def build_wheel(wheel_directory, config_settings=None, metadata_directory=None):
     asset = _asset(config_settings)
     if asset is None:
+        import _windows_source_backend
+        if _windows_source_backend.enabled(config_settings):
+            return _windows_source_backend.build_wheel(
+                _source(), wheel_directory, metadata_directory)
         return _source().build_wheel(wheel_directory, config_settings, metadata_directory)
     target = Path(wheel_directory).resolve()
     target.mkdir(parents=True, exist_ok=True)

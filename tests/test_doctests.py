@@ -22,11 +22,6 @@ def fix_doctests(suite):
             "pexels/time-lapse-video-of-night-sky-857195.mp4"
         )
 
-        for example in case._dt_test.examples:
-            # Remove b prefix from strings.
-            if example.want.startswith("b'"):
-                example.want = example.want[1:]
-
 
 def register_doctests(mod):
     if isinstance(mod, str):
@@ -42,11 +37,25 @@ def register_doctests(mod):
     cls_name = "Test" + "".join(x.title() for x in mod.__name__.split("."))
     cls = type(cls_name, (TestCase,), {})
 
-    for test in suite._tests:
-
+    def bind_test(test):
         def func(self):
-            return test.runTest()
+            # DocTestCase.run owns setup/teardown and its result state.  Calling
+            # runTest directly bypasses that lifecycle on Python 3.15.
+            result = self.defaultTestResult()
+            test.run(result)
+            self.assertEqual(result.testsRun, 1)
+            self.assertTrue(
+                result.wasSuccessful(),
+                "\n".join(
+                    traceback for _, traceback in result.errors + result.failures
+                ),
+            )
 
+        return func
+
+    for test in suite._tests:
+        # Bind each case separately instead of closing over the last loop item.
+        func = bind_test(test)
         name = str("test_" + re.sub("[^a-zA-Z0-9]+", "_", test.id()).strip("_"))
         func.__name__ = name
         setattr(cls, name, func)
