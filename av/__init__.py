@@ -1,3 +1,4 @@
+# isort: skip_file
 # MUST import the core before anything else in order to initialize the underlying
 # library that is being wrapped.
 from av._core import time_base, library_versions, ffmpeg_version_info
