@@ -29,16 +29,18 @@ def _normalized_project(path):
 def _asset(config_settings=None):
     if (config_settings or sys.version_info[:2] != (3, 15)
             or not sysconfig.get_config_var('Py_GIL_DISABLED')
-            or sys.platform != 'linux' or platform.machine() != 'x86_64'):
+            or sys.platform not in ('linux', 'win32')
+            or platform.machine().lower() not in ('x86_64', 'amd64')):
         return None
     if any(os.environ.get(name) for name in
            ('CFLAGS', 'CXXFLAGS', 'CPPFLAGS', 'LDFLAGS', 'CC', 'CXX')):
         return None
     data = _manifest()
-    libc, version = platform.libc_ver()
-    if (libc != 'glibc'
-            or tuple(map(int, version.split('.'))) < tuple(data['minimum_glibc'])):
-        return None
+    if sys.platform == 'linux':
+        libc, version = platform.libc_ver()
+        if (libc != 'glibc'
+                or tuple(map(int, version.split('.'))) < tuple(data['minimum_glibc'])):
+            return None
     for name, digest in data['delivery_source_hashes'].items():
         path = ROOT / name
         if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
@@ -61,7 +63,7 @@ def _asset(config_settings=None):
             return None
     except (OSError, subprocess.SubprocessError):
         return None
-    return data['artifact']
+    return data['artifacts'][sys.platform]
 
 
 def _source():

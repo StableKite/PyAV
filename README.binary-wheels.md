@@ -1,31 +1,34 @@
-# Experimental CPython 3.15t Linux wheels
+# CPython 3.15t engineering wheels
 
-A normal `pip install` from this repository selects the verified release wheel
-for the recorded source snapshot on Linux x86_64, CPython 3.15t and glibc 2.39+.
-pip performs downloading, dependency resolution and SHA256 validation.
-No consumer SDK setup or extra build flag is required for this binary path.
+A normal `pip install git+https://github.com/StableKite/PyAV.git` selects the
+verified engineering wheel on CPython 3.15t Windows x86-64 or Linux x86-64 with
+glibc 2.39+. No FFmpeg SDK, compiler or extra consumer flag is required for
+these recorded binary paths. pip validates the pinned SHA256.
 
-The original PEP 517 backend and its build requirements are preserved. Changed
-native/build sources, another ABI/platform, explicit configuration settings or
-compiler overrides use that original source build. The JSON manifest records
-the source commit, artifact hash and the checked delivery metadata. Source
-builds retain their ordinary development-library prerequisites.
+Version `19.0.2+stablekite.1` preserves the selected FFmpeg codec after an
+unsuccessful open, so retrying invalid input raises an ordinary exception.
+Correcting the complete configuration permits real encoding on the same
+context. FFmpeg itself clears the audio channel layout during failed-open
+cleanup; callers must restore it as well as correcting the invalid format.
 
-These are engineering dependency artifacts, not a StableKite release.
+Both original wheels were built from clean source against the official
+PyAV FFmpeg 9.0.2-2 shared SDK, with every Cython extension rebuilt together.
+The Windows source commit is `7b25676794bb2fdf1d28024c60126e6604b5f50f`;
+Linux and the corrected subprocess regression use
+`e2ccdab29a07d1797dbbd84f72a4521fe17d8c4a`. Their runtime/build sources are
+identical; the latter changes only three lines of the regression helper.
+Each platform passed all 574 canonical tests (543 passed, 31 pre-existing
+SDK capability skips), real AAC and libopus failure/recovery, every native
+module import, lossless video and native-thread encoding with natural GIL OFF.
 
-On CPython 3.15t Windows x86-64, a normal source installation automatically
-fetches the official PyAV FFmpeg 9.0.2-2 SDK, verifies its SHA256 and size,
-compiles the original PyAV extensions, and uses delvewheel to bundle their DLL
-dependencies. The usual Visual C++ build tools are required; no FFmpeg SDK
-installation or consumer configuration flag is required. The pinned SDK is
-`https://github.com/PyAV-Org/pyav-ffmpeg/releases/download/9.0.2-2/ffmpeg-windows-x86_64.tar.gz`,
-SHA256 `647a8f6d7d5f6e78ce9d33b8ea43b1f98eb1055e69ac5de26b31ecfe8b45142d`.
-Its source build recipes and third-party component versions are maintained in
+`binary_wheels.json` records the source snapshot, original artifact hashes
+and delivery-file checks. Native/build source changes, explicit build settings,
+compiler overrides or another ABI/platform retain the original source backend.
+On Windows 3.15t x86-64 that source fallback automatically obtains the official
+SDK, checks its size and SHA256, builds the extensions and bundles their DLLs
+using delvewheel. Other source platforms retain their normal development SDK
+prerequisites.
+
+The SDK build recipes and third-party component versions are maintained in
 the [upstream SDK project](https://github.com/PyAV-Org/pyav-ffmpeg).
-
-The Linux wheel's native source snapshot remains unchanged. The manifest also
-accounts for the Windows-only delivery helper and the doctest lifecycle fix;
-neither changes a runtime Python/Cython extension. The doctest fix runs each
-original example through its public unittest lifecycle and preserves expected
-bytes output. Explicit build settings and compiler overrides retain the
-original developer-managed source build.
+These artifacts are engineering dependency builds, not a StableKite release.

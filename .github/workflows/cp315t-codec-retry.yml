@@ -1,0 +1,32 @@
+name: CPython 3.15t codec retry and default pip
+on:
+  push:
+    branches: [codex/cp315t-wheels]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  consumer:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.15t'
+      - name: Ordinary default-branch installation
+        run: python -m pip install git+https://github.com/StableKite/PyAV.git numpy pillow pytest
+      - name: Real codec recovery, native threads and all canonical tests
+        run: python -I -u .github/scripts/cp315t_consumer_gate.py
+      - run: python -m pip check
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: pyav-cp315t-${{ matrix.os }}
+          path: pyav-cp315t-evidence/

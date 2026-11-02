@@ -1,3 +1,14 @@
 # POSIX-sensitive files: always LF
 *.sh        text eol=lf
 Makefile    text eol=lf
+# Delivery checksums describe canonical Git bytes on both Windows and Linux.
+_binary_wheel_backend.py text eol=lf
+_windows_source_backend.py text eol=lf
+binary_wheels.json text eol=lf
+README.binary-wheels.md text eol=lf
+pyproject.toml text eol=lf
+MANIFEST.in text eol=lf
+tests/test_doctests.py text eol=lf
+.gitattributes text eol=lf
+.github/scripts/cp315t_*.py text eol=lf
+.github/workflows/cp315t-codec-retry.yml text eol=lf
