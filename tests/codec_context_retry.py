@@ -40,6 +40,9 @@ def main() -> None:
 
         # Correcting the configuration must retain the selected implementation
         # and permit real encoding, rather than permanently poisoning the context.
+        # FFmpeg also clears ch_layout during failed-open cleanup, so restore
+        # the complete valid audio configuration before retrying.
+        context.layout = "stereo"
         context.format = "fltp"
         frame = av.AudioFrame(format="s16", layout="stereo", samples=1024)
         frame.sample_rate = 48000
