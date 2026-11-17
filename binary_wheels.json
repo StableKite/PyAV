@@ -1,5 +1,5 @@
 {
-  "source_commit": "e2ccdab29a07d1797dbbd84f72a4521fe17d8c4a",
+  "source_commit": "e14518b61d6f32e04d45c1b2ac3e3dc28d72340b",
   "source_backend": "setuptools.build_meta:__legacy__",
   "source_backend_path": [],
   "minimum_glibc": [
@@ -23,27 +23,27 @@
   ],
   "delivery_source_hashes": {
     "_binary_wheel_backend.py": "f20f9740f0b80ea9df65f2d08900839fd549106e086d668e9a135d5296936e39",
-    "README.binary-wheels.md": "a18f5da423e9fd6cf3d32a87c51eb8c0d5f770f62534313100440af662f6157a",
+    "README.binary-wheels.md": "d9f3ee420009984ebf4977c2a5e66d0dd21985881cc10fa3cef1f73ccbd24fc6",
     "pyproject.toml": "d9ca0d87bd1a9ed5210ea0ff8bcd53a24c72b67a319c2c421abebd0b915f6e25",
     "MANIFEST.in": "20f9e1d7feada9ae909c1b005ed5c0d4c051240307e75532586e436ad5fb80a6",
     "_windows_source_backend.py": "634d5aae5b0f0404018fb62cf10cc3512928b399e1cd7c7dbc973ebd3cdf0ec0",
     "tests/test_doctests.py": "dbf533e93457494a4b1ea2875fc1cf2c3c89b55038cbe4db58f5df38b5ee441b",
     ".gitattributes": "c6bbbcc5caaf425e70fa5c3dd0161ae2c5bdc372cc99242c257d3f46c122a2d0",
     ".github/workflows/cp315t-codec-retry.yml": "7e1d4349d7983e628edaaced6b2397ba16ee66ba67d3bcbc32c3dc779da54d37",
-    ".github/scripts/cp315t_consumer_gate.py": "ef80698c122802704c24593bd2cee9e75c6e3675831e9a1a4efeac2d82fe2700",
+    ".github/scripts/cp315t_consumer_gate.py": "2e8b3e146caacaee899b8c689c1d93cd0169901d055520d0b74a53fc0e47914c",
     ".github/scripts/cp315t_native_contract.py": "563b5f46fcf837d3726c057f91f9d0e350429daab6943a26c3ce5bbab795f6a8",
     ".github/scripts/cp315t_libopus_retry.py": "5d24de8167aa83b1e462ecfd1ae7cf4ca4c1a0e6778d2730d3ed22fe1f433082"
   },
   "artifacts": {
     "win32": {
-      "filename": "av-19.0.2+stablekite.1-cp315-cp315t-win_amd64.whl",
-      "url": "https://github.com/StableKite/PyAV/releases/download/cp315t-codec-retry-engineering-20261102-1/av-19.0.2+stablekite.1-cp315-cp315t-win_amd64.whl",
-      "sha256": "589941b1bc072fc911b789ea63fb0c125bd8dc3f0c3ce3fb950d5a05d26f41eb"
+      "filename": "av-19.0.2+stablekite.2-cp315-cp315t-win_amd64.whl",
+      "url": "https://github.com/StableKite/PyAV/releases/download/cp315t-packet-typing-20261118-1/av-19.0.2+stablekite.2-cp315-cp315t-win_amd64.whl",
+      "sha256": "fd38d68c6c98e9fad752c9369041f48f76f2afc3f098ec5559d77cdb1aad3afa"
     },
     "linux": {
-      "filename": "av-19.0.2+stablekite.1-cp315-cp315t-manylinux_2_38_x86_64.whl",
-      "url": "https://github.com/StableKite/PyAV/releases/download/cp315t-codec-retry-engineering-20261102-1/av-19.0.2+stablekite.1-cp315-cp315t-manylinux_2_38_x86_64.whl",
-      "sha256": "4060a87f0dce4a52362e5734ac2e8b1c345b8360736d00456e5241c944cac36a"
+      "filename": "av-19.0.2+stablekite.2-cp315-cp315t-manylinux_2_38_x86_64.whl",
+      "url": "https://github.com/StableKite/PyAV/releases/download/cp315t-packet-typing-20261118-1/av-19.0.2+stablekite.2-cp315-cp315t-manylinux_2_38_x86_64.whl",
+      "sha256": "fa572e6ac2dcaa83dcd595520edfa4489878b7f25505fb5055adbd3af0256f8e"
     }
   }
 }
