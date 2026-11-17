@@ -1,5 +1,5 @@
 from .codec import Codec
-from .packet import Packet
+from .packet import Packet, StreamT
 from .stream import Stream
 
 class BitStreamFilterContext:
@@ -9,7 +9,7 @@ class BitStreamFilterContext:
         in_stream: Stream | Codec | str | None = None,
         out_stream: Stream | None = None,
     ): ...
-    def filter(self, packet: Packet | None) -> list[Packet]: ...
+    def filter(self, packet: Packet[StreamT] | None = None) -> list[Packet[Stream]]: ...
     def flush(self) -> None: ...
 
 bitstream_filters_available: set[str]

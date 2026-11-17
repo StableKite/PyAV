@@ -22,7 +22,7 @@ out = root / "pyav-cp315t-evidence"
 out.mkdir(exist_ok=False)
 assert "PYTHON_GIL" not in os.environ
 assert sys.flags.gil is None and not sys._is_gil_enabled()
-assert av.__version__ == "19.0.2+stablekite.1"
+assert av.__version__ == "19.0.2+stablekite.2"
 assert not Path(av.__file__).resolve().is_relative_to(root)
 dist = importlib.metadata.distribution("av")
 direct = json.loads(dist.read_text("direct_url.json") or "null")

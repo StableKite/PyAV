@@ -1,11 +1,11 @@
-from collections.abc import Sequence
+from collections.abc import Iterable
 from fractions import Fraction
 from typing import TypeVar, overload
 
 from av.audio import _AudioCodecName
 from av.audio.stream import AudioStream
 from av.codec.hwaccel import HWAccel
-from av.packet import Packet
+from av.packet import Packet, StreamT
 from av.rational import AVRational
 from av.stream import AttachmentStream, DataStream, Stream
 from av.subtitles import _SubtitleCodecName
@@ -14,6 +14,15 @@ from av.video import _VideoCodecName
 from av.video.stream import VideoStream
 
 from .core import Container
+
+_BuiltinStreamPacket = (
+    Packet[Stream]
+    | Packet[AudioStream]
+    | Packet[VideoStream]
+    | Packet[SubtitleStream]
+    | Packet[DataStream]
+    | Packet[AttachmentStream]
+)
 
 _StreamT = TypeVar("_StreamT", bound=Stream)
 
@@ -68,8 +77,11 @@ class OutputContainer(Container):
         self, codec_name: str | None = None, options: dict[str, str] | None = None
     ) -> DataStream: ...
     def start_encoding(self) -> None: ...
-    def mux(self, packets: Packet | Sequence[Packet]) -> None: ...
-    def mux_one(self, packet: Packet) -> None: ...
+    @overload
+    def mux(self, packets: Packet[StreamT] | Iterable[Packet[StreamT]]) -> None: ...
+    @overload
+    def mux(self, packets: Iterable[_BuiltinStreamPacket]) -> None: ...
+    def mux_one(self, packet: Packet[StreamT]) -> None: ...
     @property
     def default_video_codec(self) -> str: ...
     @property

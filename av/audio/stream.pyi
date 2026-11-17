@@ -1,6 +1,6 @@
 from typing import Literal
 
-from av.packet import Packet
+from av.packet import Packet, StreamT
 from av.stream import Stream
 
 from .codeccontext import AudioCodecContext
@@ -18,8 +18,8 @@ class _Layout:
 
 class AudioStream(Stream):
     codec_context: AudioCodecContext
-    def encode(self, frame: AudioFrame | None = None) -> list[Packet]: ...
-    def decode(self, packet: Packet | None = None) -> list[AudioFrame]: ...
+    def encode(self, frame: AudioFrame | None = None) -> list[Packet[AudioStream]]: ...
+    def decode(self, packet: Packet[StreamT] | None = None) -> list[AudioFrame]: ...
 
     # From codec context
     frame_size: int

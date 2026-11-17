@@ -1,6 +1,8 @@
-from collections.abc import Iterator
+from collections.abc import Buffer as BufferProtocol, Iterator
 from fractions import Fraction
-from typing import Generic, Literal, TypeVar, overload
+from typing import Generic, Literal, overload
+
+from typing_extensions import TypeVar
 
 from av.audio.frame import AudioFrame
 from av.audio.stream import AudioStream
@@ -12,7 +14,6 @@ from av.video.frame import VideoFrame
 from av.video.stream import VideoStream
 
 from .buffer import Buffer
-from .stream import Stream
 
 # Sync with definition in 'packet.py'
 PktSideDataT = Literal[
@@ -63,8 +64,8 @@ PktSideDataT = Literal[
 
 class PacketSideData(Buffer):
     @staticmethod
-    def from_packet(packet: Packet[Stream], dtype: PktSideDataT) -> PacketSideData: ...
-    def to_packet(self, packet: Packet[Stream], move: bool = False): ...
+    def from_packet(packet: Packet[StreamT], dtype: PktSideDataT) -> PacketSideData: ...
+    def to_packet(self, packet: Packet[StreamT], move: bool = False) -> None: ...
     @property
     def data_type(self) -> str: ...
     @property
@@ -76,12 +77,15 @@ class PacketSideData(Buffer):
 def packet_sidedata_type_to_literal(dtype: int) -> PktSideDataT: ...
 def packet_sidedata_type_from_literal(dtype: PktSideDataT) -> int: ...
 
-# TypeVar for stream types - bound to Stream so it can be any stream type
-StreamT = TypeVar("StreamT", bound=Stream)
+StreamT = TypeVar("StreamT", bound=Stream, default=Stream)
 
 class Packet(Buffer, Generic[StreamT]):
-    stream: StreamT
-    stream_index: int
+    @property
+    def stream(self) -> StreamT | None: ...
+    @stream.setter
+    def stream(self, stream: StreamT) -> None: ...
+    @property
+    def stream_index(self) -> int: ...
     @property
     def time_base(self) -> AVRational: ...
     @time_base.setter
@@ -98,7 +102,7 @@ class Packet(Buffer, Generic[StreamT]):
     is_trusted: bool
     is_disposable: bool
 
-    def __init__(self: Packet[Stream], input: int | bytes | None = None) -> None: ...
+    def __init__(self, input: int | BufferProtocol | None = None) -> None: ...
     def rescale_ts(self, time_base: AVRational) -> None: ...
 
     # Overloads that return the same type as the stream's decode method

@@ -1,3 +1,4 @@
+from collections.abc import Buffer
 from dataclasses import dataclass
 from enum import Flag, IntEnum, IntFlag
 from fractions import Fraction
@@ -8,6 +9,7 @@ from av.audio.codeccontext import AudioCodecContext
 from av.packet import Packet, PktSideDataT
 from av.rational import AVRational
 from av.sidedata.sidedata import Type as FrameSideDataType
+from av.stream import Stream
 from av.subtitles import _SubtitleCodecName
 from av.subtitles.codeccontext import SubtitleCodecContext
 from av.video import _VideoCodecName
@@ -218,7 +220,5 @@ class CodecContext:
         mode: Literal["r", "w"] | None = None,
         hwaccel: HWAccel | None = None,
     ) -> CodecContext: ...
-    def parse(
-        self, raw_input: bytes | bytearray | memoryview | None = None
-    ) -> list[Packet]: ...
+    def parse(self, raw_input: Buffer | None = None) -> list[Packet[Stream]]: ...
     def flush_buffers(self) -> None: ...

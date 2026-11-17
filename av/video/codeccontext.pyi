@@ -3,8 +3,9 @@ from fractions import Fraction
 from typing import Literal
 
 from av.codec.context import CodecContext
-from av.packet import Packet
+from av.packet import Packet, StreamT
 from av.rational import AVRational
+from av.stream import Stream
 
 from .format import VideoFormat
 from .frame import VideoFrame
@@ -52,6 +53,8 @@ class VideoCodecContext(CodecContext):
     qmax: int
     type: Literal["video"]
 
-    def encode(self, frame: VideoFrame | None = None) -> list[Packet]: ...
-    def encode_lazy(self, frame: VideoFrame | None = None) -> Iterator[Packet]: ...
-    def decode(self, packet: Packet | None = None) -> list[VideoFrame]: ...
+    def encode(self, frame: VideoFrame | None = None) -> list[Packet[Stream]]: ...
+    def encode_lazy(
+        self, frame: VideoFrame | None = None
+    ) -> Iterator[Packet[Stream]]: ...
+    def decode(self, packet: Packet[StreamT] | None = None) -> list[VideoFrame]: ...
