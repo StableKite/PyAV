@@ -332,22 +332,22 @@ class TestCodecContext(TestCase):
 
     def _assert_parse(self, codec_name: str, path: str) -> None:
         fh = av.open(path)
-        packets = []
+        demuxed_packets = []
         for packet in fh.demux(video=0):
-            packets.append(packet)
+            demuxed_packets.append(packet)
 
-        full_source = b"".join(bytes(p) for p in packets)
+        full_source = b"".join(bytes(p) for p in demuxed_packets)
 
         for size in 1024, 8192, 65535:
             ctx = Codec(codec_name).create()
-            packets = []
+            parsed_packets = []
 
             for i in range(0, len(full_source), size):
                 block = full_source[i : i + size]
-                packets.extend(ctx.parse(block))
-            packets.extend(ctx.parse())
+                parsed_packets.extend(ctx.parse(block))
+            parsed_packets.extend(ctx.parse())
 
-            parsed_source = b"".join(bytes(p) for p in packets)
+            parsed_source = b"".join(bytes(p) for p in parsed_packets)
             assert len(parsed_source) == len(full_source)
             assert full_source == parsed_source
 

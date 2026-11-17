@@ -172,9 +172,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 end=int(2 / time_base),
                 pts=0,
             )
-            packet = sub_ctx.encode_subtitle(subtitle)
-            packet.stream = sub_stream
-            container.mux(packet)
+            subtitle_packet = sub_ctx.encode_subtitle(subtitle)
+            subtitle_packet.stream = sub_stream
+            container.mux(subtitle_packet)
 
             for packet in video_stream.encode():
                 container.mux(packet)

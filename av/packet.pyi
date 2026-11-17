@@ -1,4 +1,5 @@
-from collections.abc import Buffer as BufferProtocol, Iterator
+from collections.abc import Buffer as BufferProtocol
+from collections.abc import Iterator
 from fractions import Fraction
 from typing import Generic, Literal, overload
 

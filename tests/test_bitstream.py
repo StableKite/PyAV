@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Buffer
+
 import pytest
 
 import av
@@ -9,7 +11,7 @@ from av.bitstream import BitStreamFilterContext, bitstream_filters_available
 from .common import fate_suite
 
 
-def is_annexb(packet: Packet | bytes | None) -> bool:
+def is_annexb(packet: Buffer | None) -> bool:
     if packet is None:
         return False
 
@@ -68,8 +70,8 @@ def test_filter_h264_mp4toannexb() -> None:
 
         assert len(res_packets) == stream.frames
 
-        for p in res_packets:
-            assert is_annexb(p)
+        for filtered in res_packets:
+            assert is_annexb(filtered)
 
 
 def test_filter_in_stream_codec_and_name() -> None:
