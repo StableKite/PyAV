@@ -14,8 +14,10 @@ The prior handling of FFmpeg failed opens remains in place. An unsuccessful
 open preserves the selected codec. A caller retrying an audio open must restore
 the full configuration because FFmpeg clears the channel layout on failure.
 
-The native extensions were rebuilt against the upstream PyAV FFmpeg 9.0.2-2
-shared SDK. The final wheels carry the exact stubs and version file from
+The wheels with build tag 1 correct the integer values of the container
+Flags enum. They retain the version and every native extension and FFmpeg
+library from the preceding build, compiled against the upstream PyAV
+FFmpeg 9.0.2-2 shared SDK. The final wheels carry the exact stubs and version file from
 the source recorded in `binary_wheels.json`. Each wheel was tested in
 a clean environment, including the canonical test suite, AAC and libopus
 failure recovery, native imports, threading and real packet encode, demux and
