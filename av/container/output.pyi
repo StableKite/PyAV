@@ -33,7 +33,7 @@ class OutputContainer(Container):
         codec_name: _AudioCodecName,
         rate: int | None = None,
         options: dict[str, str] | None = None,
-        **kwargs,
+        **kwargs: object,
     ) -> AudioStream: ...
     @overload
     def add_stream(
@@ -42,7 +42,7 @@ class OutputContainer(Container):
         rate: AVRational | Fraction | int | None = None,
         options: dict[str, str] | None = None,
         hwaccel: HWAccel | None = None,
-        **kwargs,
+        **kwargs: object,
     ) -> VideoStream: ...
     @overload
     def add_stream(
@@ -50,7 +50,7 @@ class OutputContainer(Container):
         codec_name: _SubtitleCodecName,
         rate: AVRational | Fraction | int | None = None,
         options: dict[str, str] | None = None,
-        **kwargs,
+        **kwargs: object,
     ) -> SubtitleStream: ...
     @overload
     def add_stream(
@@ -59,7 +59,7 @@ class OutputContainer(Container):
         rate: AVRational | Fraction | int | None = None,
         options: dict[str, str] | None = None,
         hwaccel: HWAccel | None = None,
-        **kwargs,
+        **kwargs: object,
     ) -> VideoStream | AudioStream | SubtitleStream: ...
     def add_mux_stream(
         self,
