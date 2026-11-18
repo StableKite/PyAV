@@ -1,5 +1,5 @@
 {
-  "source_commit": "6f961a622808f5889655d385cd68644eed767ce5",
+  "source_commit": "9aeefa2c692ff3ca3aa0e4c2d3bc557caa9d638b",
   "source_backend": "setuptools.build_meta:__legacy__",
   "source_backend_path": [],
   "minimum_glibc": [
@@ -23,7 +23,7 @@
   ],
   "delivery_source_hashes": {
     "_binary_wheel_backend.py": "f20f9740f0b80ea9df65f2d08900839fd549106e086d668e9a135d5296936e39",
-    "README.binary-wheels.md": "5a24abfc78013dce0766bfa36a02dd6c75b492182b775a9824f68145407bdd1b",
+    "README.binary-wheels.md": "956d4d7cd70e70ac2eaf23ba6cff1244b7a48e864ae214d708d7e600db227f8f",
     "pyproject.toml": "d9ca0d87bd1a9ed5210ea0ff8bcd53a24c72b67a319c2c421abebd0b915f6e25",
     "MANIFEST.in": "20f9e1d7feada9ae909c1b005ed5c0d4c051240307e75532586e436ad5fb80a6",
     "_windows_source_backend.py": "634d5aae5b0f0404018fb62cf10cc3512928b399e1cd7c7dbc973ebd3cdf0ec0",
@@ -36,14 +36,14 @@
   },
   "artifacts": {
     "win32": {
-      "filename": "av-19.0.2+stablekite.2-1-cp315-cp315t-win_amd64.whl",
-      "url": "https://github.com/StableKite/PyAV/releases/download/cp315t-container-flags-20261118-1/av-19.0.2%2Bstablekite.2-1-cp315-cp315t-win_amd64.whl",
-      "sha256": "1c7b815b69d65c35637a278b5806bc2c4eeda7952d0b2db9df4b000266981fea"
+      "filename": "av-19.0.2+stablekite.2-2-cp315-cp315t-win_amd64.whl",
+      "url": "https://github.com/StableKite/PyAV/releases/download/cp315t-add-stream-keywords-20261118-2/av-19.0.2%2Bstablekite.2-2-cp315-cp315t-win_amd64.whl",
+      "sha256": "c083ebd0fca8a2ae10b5403229a139a54418fc237eb0600627375bc0ef3a9da8"
     },
     "linux": {
-      "filename": "av-19.0.2+stablekite.2-1-cp315-cp315t-manylinux_2_38_x86_64.whl",
-      "url": "https://github.com/StableKite/PyAV/releases/download/cp315t-container-flags-20261118-1/av-19.0.2%2Bstablekite.2-1-cp315-cp315t-manylinux_2_38_x86_64.whl",
-      "sha256": "443d875e8e7e87ea9ea2eb223ad1660c943396aeeba8644386e13692c10d36d0"
+      "filename": "av-19.0.2+stablekite.2-2-cp315-cp315t-manylinux_2_38_x86_64.whl",
+      "url": "https://github.com/StableKite/PyAV/releases/download/cp315t-add-stream-keywords-20261118-2/av-19.0.2%2Bstablekite.2-2-cp315-cp315t-manylinux_2_38_x86_64.whl",
+      "sha256": "ce6d60fbb358c2d28d4f8d88cc7c4e72ebae7bcc02a2b4c74d1d56c0919a3fb3"
     }
   }
 }
